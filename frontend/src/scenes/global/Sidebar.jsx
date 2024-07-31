@@ -89,16 +89,6 @@ const Sidebar = () => {
 
           {!isCollapsed && (
             <Box mb="26px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src={`../../assets/user.`}
-                  style={{ cursor: "pointer", borderRadius: "100%" }}
-                />
-              </Box>
-
               {/* NAME OF THE USER/MERCHANT */}
               <Box textAlign="center">
                 <Typography
@@ -107,7 +97,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Batman
+                  Jake Peralta
                 </Typography>
               </Box>
             </Box>
@@ -128,16 +118,16 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Transfer" //Contacts Information
               to="/contacts"
               icon={<SyncAltSharpIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="QR Code" //Invoices Balances
-              to="/invoices"
+              to="/qrcode"
               icon={<QrCodeScannerIcon />}
               selected={selected}
               setSelected={setSelected}
