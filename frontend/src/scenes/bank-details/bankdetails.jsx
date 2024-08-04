@@ -34,6 +34,19 @@ const BankDetails = () => {
         Bank Details
       </Typography>
       <Box mb={2}>
+        <Typography variant="h5" gutterBottom>
+          Added Banks
+        </Typography>
+        <List>
+          {banks.map((bank, index) => (
+            <ListItem key={index}>
+              <ListItemText
+                primary={`Bank Name: ${bank.bankName}`}
+                secondary={`Account Number: ${bank.accountNumber}, IFSC Code: ${bank.ifscCode}`}
+              />
+            </ListItem>
+          ))}
+        </List>
         <TextField
           label="Bank Name"
           value={bankName}
@@ -68,19 +81,6 @@ const BankDetails = () => {
           Add Bank
         </Button>
       </Box>
-      <Typography variant="h5" gutterBottom>
-        Added Banks
-      </Typography>
-      <List>
-        {banks.map((bank, index) => (
-          <ListItem key={index}>
-            <ListItemText
-              primary={`Bank Name: ${bank.bankName}`}
-              secondary={`Account Number: ${bank.accountNumber}, IFSC Code: ${bank.ifscCode}`}
-            />
-          </ListItem>
-        ))}
-      </List>
     </Box>
   );
 };

@@ -14,36 +14,36 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         axis: {
           domain: {
             line: {
-              stroke: colors.grey[100],
-            },
+              stroke: colors.grey[100]
+            }
           },
           legend: {
             text: {
-              fill: colors.grey[100],
-            },
+              fill: colors.grey[100]
+            }
           },
           ticks: {
             line: {
               stroke: colors.grey[100],
-              strokeWidth: 1,
+              strokeWidth: 1
             },
             text: {
-              fill: colors.grey[100],
-            },
-          },
+              fill: colors.grey[100]
+            }
+          }
         },
         legends: {
           text: {
-            fill: colors.grey[100],
-          },
+            fill: colors.grey[100]
+          }
         },
         tooltip: {
           container: {
-            color: colors.primary[500],
-          },
-        },
+            color: colors.primary[500]
+          }
+        }
       }}
-      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
+      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{
@@ -51,7 +51,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         min: "auto",
         max: "auto",
         stacked: true,
-        reverse: false,
+        reverse: false
       }}
       yFormat=" >-.2f"
       curve="catmullRom"
@@ -64,7 +64,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         tickRotation: 0,
         legend: isDashboard ? undefined : "transportation", // added
         legendOffset: 36,
-        legendPosition: "middle",
+        legendPosition: "middle"
       }}
       axisLeft={{
         orient: "left",
@@ -74,7 +74,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         tickRotation: 0,
         legend: isDashboard ? undefined : "count", // added
         legendOffset: -40,
-        legendPosition: "middle",
+        legendPosition: "middle"
       }}
       enableGridX={false}
       enableGridY={false}
@@ -104,11 +104,11 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
               on: "hover",
               style: {
                 itemBackground: "rgba(0, 0, 0, .03)",
-                itemOpacity: 1,
-              },
-            },
-          ],
-        },
+                itemOpacity: 1
+              }
+            }
+          ]
+        }
       ]}
     />
   );
