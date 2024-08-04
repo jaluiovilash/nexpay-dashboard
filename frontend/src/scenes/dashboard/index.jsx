@@ -1,17 +1,65 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
-import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
+// import axios from "axios";
+import { useState, useEffect } from "react";
+import { fetchAndSetMockDataLedger } from "../../data/mockData";
+
+// Fetch merchant data from the backend
+// const getMerchantData = async () => {
+//   try {
+//     const response = await axios.get("http://localhost:5000/nexpay/api/get/1");
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching transactions:", error);
+//     return null;
+//   }
+// };
 
 const Dashboard = () => {
+  const [data, setData] = useState(null);
+  const [totalRevenue, setTotalRevenue] = useState(0); // State to hold total revenue
+  const [ledgerData, setLedgerData] = useState([]); // State to hold ledger data
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await getMerchantData();
+  //     setData(result);
+  //     console.log(result);
+  //   };
+
+  //   fetchData();
+  //   fetchAndSetMockDataLedger().then((ledger) => {
+  //     setLedgerData(ledger);
+  //   });
+  // }, []);
+
+  // Callback to receive total revenue from LineChart
+  const handleTotalRevenueChange = (revenue) => {
+    setTotalRevenue(revenue);
+  };
+
+  if (!data || ledgerData.length === 0) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+      >
+        <DashboardOutlinedIcon />
+        <Typography> Fetching your data...</Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box m="20px">
@@ -47,7 +95,7 @@ const Dashboard = () => {
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
-            subtitle="1000000"
+            subtitle={data["merchantBalance"]}
           />
         </Box>
         <Box
@@ -85,7 +133,7 @@ const Dashboard = () => {
               Recent Transactions
             </Typography>
           </Box>
-          {mockTransactions.map((transaction, i) => (
+          {ledgerData.map((transaction, i) => (
             <Box
               key={`${transaction.txId}-${i}`}
               display="flex"
@@ -96,23 +144,31 @@ const Dashboard = () => {
             >
               <Box>
                 <Typography
-                  color={colors.greenAccent[500]}
+                  color={
+                    transaction.status === "success"
+                      ? colors.greenAccent[500]
+                      : colors.redAccent[500]
+                  }
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
+                  {transaction.orderID}
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  {transaction.user}
+                  {transaction.status} | {transaction.transactionTime}
                 </Typography>
               </Box>
               <Box color={colors.grey[100]}>{transaction.date}</Box>
               <Box
-                backgroundColor={colors.greenAccent[500]}
+                backgroundColor={
+                  transaction.status === "success"
+                    ? colors.greenAccent[500]
+                    : colors.redAccent[500]
+                }
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                ₹ {transaction.amount}
               </Box>
             </Box>
           ))}
@@ -153,57 +209,40 @@ const Dashboard = () => {
                     }}
                   />
                 </IconButton>
-                1000000
+                {totalRevenue} {/* Display total revenue */}
               </Typography>
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
+            <LineChart
+              isDashboard={true}
+              onTotalRevenueChange={handleTotalRevenueChange}
+            />
           </Box>
         </Box>
 
         {/* ROW 3 */}
         <Box
           gridColumn="span 4"
-          gridRow="span 2"
+          gridRow="span 1"
           backgroundColor={colors.primary[400]}
           p="30px"
         >
           <Typography variant="h5" fontWeight="600">
             API Key:
           </Typography>
-          {/* <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h5"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box> */}
+          <h2>{data["apiKey"]}</h2>
         </Box>
         <Box
           gridColumn="span 4"
-          gridRow="span 2"
+          gridRow="span 1"
           backgroundColor={colors.primary[400]}
+          p="30px"
         >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Sales Quantity
+          <Typography variant="h5" fontWeight="600">
+            Email:
           </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
-          </Box>
+          <h2>{data["merchantEmail"]}</h2>
         </Box>
       </Box>
     </Box>

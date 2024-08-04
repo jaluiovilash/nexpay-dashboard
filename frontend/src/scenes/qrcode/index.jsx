@@ -17,9 +17,10 @@ const QRCodeDisplay = ({ bankDetails }) => {
       <Box
         display="flex"
         flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        height="75vh"
+        alignItems="left"
+        justifyContent="left"
+        height="700px"
+        width="100%"
         bgcolor={colors.primary[400]}
         p="20px"
         borderRadius="8px"
