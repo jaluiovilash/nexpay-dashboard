@@ -18,6 +18,10 @@ const BankDetails = () => {
 
   const addBank = () => {
     if (bankName && accountNumber && ifscCode) {
+      if (accountNumber.length !== 12) {
+        setError("Account number must be exactly 12 digits");
+        return;
+      }
       setBanks([...banks, { bankName, accountNumber, ifscCode }]);
       setBankName("");
       setAccountNumber("");
@@ -25,6 +29,13 @@ const BankDetails = () => {
       setError("");
     } else {
       setError("All fields are required");
+    }
+  };
+
+  const handleAccountNumberChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 12) {
+      setAccountNumber(value);
     }
   };
 
@@ -59,7 +70,7 @@ const BankDetails = () => {
           label="Account Number"
           type="number"
           value={accountNumber}
-          onChange={(e) => setAccountNumber(e.target.value)}
+          onChange={handleAccountNumberChange}
           fullWidth
           margin="normal"
           required
