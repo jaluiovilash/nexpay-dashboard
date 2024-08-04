@@ -14,7 +14,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.1",
-    "moongose": "^1.0.0"
+    "mongoose": "^8.5.2",
+    "moongose": "^1.0.0",
+    "mysql": "^2.18.1"
   }
 }
