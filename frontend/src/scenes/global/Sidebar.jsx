@@ -8,8 +8,6 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import HistoryIcon from "@mui/icons-material/History";
-// import SyncAltSharpIcon from "@mui/icons-material/SyncAltSharp";
-import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import ReceiptSharpIcon from "@mui/icons-material/ReceiptSharp";
 import { tokens } from "../../theme";
@@ -80,25 +78,12 @@ const Sidebar = () => {
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
-                {/* <Typography variant="h4" color={colors.grey[100]}>
-                  Nexpay
-                </Typography> */}
               </Box>
             )}
           </MenuItem>
 
           {!isCollapsed && (
             <Box mb="26px">
-              {/* <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src="../../assets/TIS00335.JPG"
-                  style={{ cursor: "pointer", borderRadius: "100%" }}
-                />
-              </Box> */}
-
               {/* NAME OF THE USER/MERCHANT */}
               <Box textAlign="center">
                 <Typography
@@ -128,21 +113,6 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="Transfer" //Contacts Information
-              to="/contacts"
-              icon={<SyncAltSharpIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
-            <Item
-              title="QR Code" //Invoices Balances
-              to="/qrcode"
-              icon={<QrCodeScannerIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
             <Item
               title="Reports" //Profile Form
               to="/reports"

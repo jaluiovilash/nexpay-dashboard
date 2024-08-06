@@ -10,17 +10,17 @@ const Ledger = () => {
   const colors = tokens(theme.palette.mode);
   const columns = [
     {
-      field: "transactionID",
+      field: "id",
       headerName: "Transaction ID",
       flex: 1
     },
     {
-      field: "orderID",
-      headerName: "Order ID",
+      field: "name",
+      headerName: "Name",
       flex: 1
     },
     {
-      field: "mode",
+      field: "method",
       headerName: "Transfer Method",
       flex: 1
     },
@@ -35,8 +35,13 @@ const Ledger = () => {
       flex: 1
     },
     {
-      field: "transactionTime",
+      field: "time",
       headerName: "Transaction Time",
+      flex: 1
+    },
+    {
+      field: "date",
+      headerName: "Transaction Date",
       flex: 1
     }
   ];
@@ -73,13 +78,7 @@ const Ledger = () => {
           }
         }}
       >
-        {/* <DataGrid checkboxSelection rows={mockDataLedger} columns={columns} /> */}
-        <DataGrid
-          checkboxSelection
-          rows={mockDataLedger}
-          columns={columns}
-          getRowId={(row) => row.transactionID}
-        />
+        <DataGrid checkboxSelection rows={mockDataLedger} columns={columns} />
       </Box>
     </Box>
   );
